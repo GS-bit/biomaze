@@ -1,18 +1,20 @@
 from game import Game
 from util import clear_screen
 
-game = Game()
+if __name__ == "__main__":
+    game = Game()
 
-while game.running:
-    clear_screen()
-    game.show_map()
-    game.status()
+    # Game loop:
+    while game.running:
+        clear_screen()
+        game.show_map()
+        game.status()
 
-if game.won:
-    print("=========================================================================")
-    print("🥇 Parabéns! Você ativou todos os órgãos e venceu o jogo!")
-    print("=========================================================================")
-else:
-    print("=========================================================================")
-    print("😔 Game over! Você ativou um órgão mais de uma vez. Tente novamente.")
-    print("=========================================================================")
+    if game.won:
+        print("=========================================================================")
+        print("🥇 Parabéns! Você ativou todos os órgãos e venceu o jogo!")
+        print("=========================================================================")
+    else:
+        print("=========================================================================")
+        print("😔 Game over! Você ativou um órgão mais de uma vez. Tente novamente.")
+        print("=========================================================================")

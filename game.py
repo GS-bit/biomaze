@@ -1,5 +1,17 @@
 class Game:
-    def __init__(self):
+    """
+    This class represents the game logic.
+    """
+
+    def __init__(self) -> None:
+        """
+        Game constructor.
+        """
+
+        """
+        A dictionary of connections: each key corresponds to an organ,
+        and their values are lists of the organs connected to the key.
+        """
         self.connections = {
             "HIPÓFISE": ["TIREOIDE", "PULMÕES", "CORAÇÃO"],
             "TIREOIDE": ["HIPÓFISE", "ESTÔMAGO", "PÂNCREAS"],
@@ -15,13 +27,17 @@ class Game:
             "SUPRARRENAL": ["INTESTINO INF."]
         }
         
-        self.cur_organ = "HIPÓFISE"
-        self.activated_organs = ["HIPÓFISE"]
+        self.cur_organ = "HIPÓFISE"  # The organ our hormone is located at the moment
+        self.activated_organs = ["HIPÓFISE"]  # A list of all organs that received the hormone
 
-        self.running = True
-        self.won = None
+        self.running = True  # Boolean variable: True if the game is running, False otherwise.
+        self.won = None  # Initially None. In the future, True if player won the game, False otherwise. 
 
-    def show_map(self):
+    def show_map(self) -> None:
+        """
+        It shows a map of the maze on the screen.
+        """
+
         print(r"""========================================================================
                     🧭 BIOMAZE: LABIRINTO ENDÓCRINO 🧭
 ========================================================================
@@ -41,7 +57,12 @@ class Game:
                             [INTESTINO INF.] ------ [SUPRARRENAL]
             """)
     
-    def status(self):
+    def status(self) -> None:
+        """
+        It shows the status of the game on the screen
+        and asks the player the desired movement. 
+        """
+
         available_connections = self.connections[self.cur_organ]
 
         print(f"""------------------------------------------------------------------------

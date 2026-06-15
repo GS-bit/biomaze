@@ -22,7 +22,7 @@ def show_menu(options: list[str], msg="> ") -> int:
         the number (int) of the selected option (starting from 1).
     """
 
-    line_width = max([len(option) for option in options]) + 25  # The number of "=" chars, representing the line width
+    line_width = max([len(option) for option in options + [msg]]) + 20  # The number of "=" chars, representing the line width
 
     print("=" * line_width)
     for _id, option in enumerate(options):

@@ -1,3 +1,6 @@
+from utils import show_menu
+
+
 class Game:
     """
     This class represents the game logic.
@@ -69,14 +72,11 @@ class Game:
 📍 Órgão atual: [ {self.cur_organ} ]
 🧪 Hormônio: Adrenalina | Órgãos ativados: {len(self.activated_organs)} de 12
 ------------------------------------------------------------------------
+
 🩸 VIAS SANGUÍNEAS DISPONÍVEIS:
 """)
-    
-        for i, organ in enumerate(available_connections, 1):
-            print(f"[ {i} ] Ir para {organ}")
-        print("")
 
-        way = input(f"➡ Escolha o seu caminho (digite o número desejado): ")
+        way = show_menu([f"Ir para {organ}" for organ in available_connections], "➡ Escolha o seu caminho (digite o número desejado): ")
 
         self.cur_organ = available_connections[int(way) - 1]
 

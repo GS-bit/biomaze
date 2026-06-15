@@ -1,7 +1,11 @@
 from game import Game
-from util import clear_screen
+from utils import clear_screen, show_menu
 
 if __name__ == "__main__":
+    clear_screen()
+    print("🧭 BIOMAZE: LABIRINTO ENDÓCRINO 🧭")
+    show_menu(["Novo jogo"])
+
     game = Game()
 
     # Game loop:

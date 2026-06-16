@@ -28,8 +28,8 @@ class Game:
             "BAÇO": ["CORAÇÃO", "INTESTINO DELGADO"],
             "INTESTINO DELGADO": ["FÍGADO", "INTESTINO GROSSO", "CORAÇÃO", "BAÇO"],
             "RINS": ["ESTÔMAGO", "PÂNCREAS", "INTESTINO DELGADO", "INTESTINO GROSSO"],
-            "INTESTINO GROSSO": ["INTESTINO DELGADO", "RINS", "SUPRARRENAL"],
-            "SUPRARRENAL": ["INTESTINO GROSSO"]
+            "INTESTINO GROSSO": ["INTESTINO DELGADO", "RINS", "SUPRARRENAIS"],
+            "SUPRARRENAIS": ["INTESTINO GROSSO"]
         }
         
         self.cur_organ = "HIPÓFISE"  # The organ our hormone is located at the moment
@@ -60,7 +60,7 @@ class Game:
                     [INTESTINO DELGADO] ----- [RINS]
                            \                 /
                             \               /
-                            [INTESTINO GROSSO] ------ [SUPRARRENAL]
+                            [INTESTINO GROSSO] ------ [SUPRARRENAIS]
             """)
     
     def status(self) -> None:

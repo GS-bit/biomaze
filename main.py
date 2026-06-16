@@ -43,6 +43,22 @@ def show_ranking() -> None:
 
     main()
 
+def help() -> None:
+    """
+    It shows how to play the game.
+    """
+
+    clear_screen()
+
+    print("❓ COMO JOGAR BIOMAZE:\n")
+
+    print("Você é um hormônio que está perambulando pelo corpo humano. Seu objetivo é passar por todos os órgãos uma única vez, sem repetição.\n")
+    print("Se isso ocorrer, você será declarado vencedor. Caso contrário, será fim de jogo.")
+
+    input("\nPressione <ENTER> para continuar...")
+
+    main()
+
 def exit_game() -> None:
     """
     It exits the game.
@@ -61,8 +77,8 @@ def main() -> None:
     print(" 🧭 BIOMAZE: LABIRINTO ENDÓCRINO 🧭 ")
     print("====================================\n")
 
-    options = {1: new_game, 2: show_ranking, 3: exit_game}
-    chosen_option = show_menu(["Novo jogo", "Mostrar ranking", "Sair"])
+    options = {1: new_game, 2: show_ranking, 3: help, 4: exit_game}
+    chosen_option = show_menu(["Novo jogo", "Mostrar ranking", "Como jogar", "Sair"])
 
     options[chosen_option]()
 

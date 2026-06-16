@@ -21,15 +21,15 @@ class Game:
             "HIPÓFISE": ["TIREOIDE", "PULMÕES", "CORAÇÃO"],
             "TIREOIDE": ["HIPÓFISE", "ESTÔMAGO", "PÂNCREAS"],
             "PULMÕES": ["HIPÓFISE", "CORAÇÃO", "FÍGADO"],
-            "CORAÇÃO": ["HIPÓFISE", "PULMÕES", "ESTÔMAGO", "FÍGADO", "BAÇO", "INTESTINO SUP."],
+            "CORAÇÃO": ["HIPÓFISE", "PULMÕES", "ESTÔMAGO", "FÍGADO", "BAÇO", "INTESTINO DELGADO"],
             "ESTÔMAGO": ["TIREOIDE", "CORAÇÃO", "PÂNCREAS", "RINS"],
             "PÂNCREAS": ["TIREOIDE", "ESTÔMAGO", "RINS"],
-            "FÍGADO": ["PULMÕES", "CORAÇÃO", "INTESTINO SUP."],
-            "BAÇO": ["CORAÇÃO", "INTESTINO SUP."],
-            "INTESTINO SUP.": ["FÍGADO", "INTESTINO INF.", "CORAÇÃO", "BAÇO"],
-            "RINS": ["ESTÔMAGO", "PÂNCREAS", "INTESTINO SUP.", "INTESTINO INF."],
-            "INTESTINO INF.": ["INTESTINO SUP.", "RINS", "SUPRARRENAL"],
-            "SUPRARRENAL": ["INTESTINO INF."]
+            "FÍGADO": ["PULMÕES", "CORAÇÃO", "INTESTINO DELGADO"],
+            "BAÇO": ["CORAÇÃO", "INTESTINO DELGADO"],
+            "INTESTINO DELGADO": ["FÍGADO", "INTESTINO GROSSO", "CORAÇÃO", "BAÇO"],
+            "RINS": ["ESTÔMAGO", "PÂNCREAS", "INTESTINO DELGADO", "INTESTINO GROSSO"],
+            "INTESTINO GROSSO": ["INTESTINO DELGADO", "RINS", "SUPRARRENAL"],
+            "SUPRARRENAL": ["INTESTINO GROSSO"]
         }
         
         self.cur_organ = "HIPÓFISE"  # The organ our hormone is located at the moment
@@ -57,10 +57,10 @@ class Game:
             [FÍGADO]    |  [BAÇO]          \         /
                    \    |     /             \       /
                     \   |    /               \     /
-                    [INTESTINO SUP.] ------- [RINS]
+                    [INTESTINO DELGADO] ----- [RINS]
                            \                 /
                             \               /
-                            [INTESTINO INF.] ------ [SUPRARRENAL]
+                            [INTESTINO GROSSO] ------ [SUPRARRENAL]
             """)
     
     def status(self) -> None:
@@ -73,7 +73,7 @@ class Game:
 
         print(f"""------------------------------------------------------------------------
 📍 Órgão atual: [ {self.cur_organ} ]
-🧪 Hormônio: Adrenalina | Órgãos ativados: {len(self.activated_organs)} de 12
+🧪 Número de órgãos ativados: {len(self.activated_organs)} de 12
 ------------------------------------------------------------------------
 
 🩸 VIAS SANGUÍNEAS DISPONÍVEIS:

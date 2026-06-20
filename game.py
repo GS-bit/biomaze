@@ -1,7 +1,7 @@
 import time
 
 from database import Database
-from utils import show_menu
+from utils import clear_screen, show_menu
 
 class Game:
     """
@@ -44,23 +44,40 @@ class Game:
         It shows a map of the maze on the screen.
         """
 
-        print(r"""========================================================================
+        """
+        color is a dictionary whose keys are the organs and whose values are tuples.
+        When we access the value of the organ, we can get ("", ""), which means "no color", or
+        ("\033[32m", "\033[0m"), which means "green color".
+
+        This is important because, on the print function below, we use these values to put colors
+        on the organ names on the map. When the name is green, that means the organ was activated.
+        When there is no color, that means the organ has not been activated yet.
+        """
+        color = {}
+
+        for i in self.connections.keys():
+            if i in self.activated_organs:
+                color[i] = ("\033[32m", "\033[0m")  # Green color
+            else:
+                color[i] = ("", "")  # Neutral color
+
+        print(rf"""========================================================================
                     🧭 BIOMAZE: LABIRINTO ENDÓCRINO 🧭
 ========================================================================
 
-            [HIPÓFISE] ----------------------- [TIREOIDE]
+            {color["HIPÓFISE"][0]}[HIPÓFISE]{color["HIPÓFISE"][1]} ----------------------- {color["TIREOIDE"][0]}[TIREOIDE]{color["TIREOIDE"][1]}
             /        \                         /        \
            /          \                       /          \
-    [PULMÕES] ---- [CORAÇÃO] ------- [ESTÔMAGO] -- [PÂNCREAS]
+    {color["PULMÕES"][0]}[PULMÕES]{color["PULMÕES"][1]} ---- {color["CORAÇÃO"][0]}[CORAÇÃO]{color["CORAÇÃO"][1]} ------- {color["ESTÔMAGO"][0]}[ESTÔMAGO]{color["ESTÔMAGO"][1]} -- {color["PÂNCREAS"][0]}[PÂNCREAS]{color["PÂNCREAS"][1]}
            \        /   | \              \             /
             \      /    |  \              \           /
-            [FÍGADO]    |  [BAÇO]          \         /
+            {color["FÍGADO"][0]}[FÍGADO]{color["FÍGADO"][1]}    |  {color["BAÇO"][0]}[BAÇO]{color["BAÇO"][1]}          \         /
                    \    |     /             \       /
                     \   |    /               \     /
-                    [INTESTINO DELGADO] ----- [RINS]
+                    {color["INTESTINO DELGADO"][0]}[INTESTINO DELGADO]{color["INTESTINO DELGADO"][1]} ----- {color["RINS"][0]}[RINS]{color["RINS"][1]}
                            \                 /
                             \               /
-                            [INTESTINO GROSSO] ------ [SUPRARRENAIS]
+                            {color["INTESTINO GROSSO"][0]}[INTESTINO GROSSO]{color["INTESTINO GROSSO"][1]} ------ {color["SUPRARRENAIS"][0]}[SUPRARRENAIS]{color["SUPRARRENAIS"][1]}
             """)
     
     def status(self) -> None:
@@ -93,6 +110,9 @@ class Game:
             print("=========================================================================")
 
         if len(self.activated_organs) == 12:
+            clear_screen()
+            self.show_map()
+
             self.running = False
 
             print("=========================================================================")

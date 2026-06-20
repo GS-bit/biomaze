@@ -17,7 +17,7 @@ class Database:
         self.cursor.execute("""
         CREATE TABLE IF NOT EXISTS scores (
             name TEXT NOT NULL,
-            time TEXT NOT NULL)           
+            time INT NOT NULL)           
         """)
 
         self.db.commit()

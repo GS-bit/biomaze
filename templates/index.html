@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Elms+Sans:ital,wght@0,100..900;1,100..900&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <title>Biomaze</title>
+</head>
+<body>
+    <main>
+        <h1>🧭 BIOMAZE: LABIRINTO ENDÓCRINO 🧭</h1>
+
+        <section id="buttons">
+            <button id="new-game-btn"><span style="font-size: 24px">🎮</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Novo jogo</button>
+            <button id="show-ranking-btn"><span style="font-size: 24px">🏆</span>&nbsp;&nbsp;Mostrar ranking</button>
+            <button id="how-to-play-btn"><span style="font-size: 24px">💡</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Como jogar</button>
+        </section>
+    </main>
+
+    <div class="modal" id="ranking-modal">
+        <div class="modal-content">
+            <h2>Ranking</h2>
+            {% if ranking == [] %}
+                <p>🚨 Nenhuma pontuação registrada até o momento!</p>
+            {% elif not ranking is none %}
+                <table>
+                    <th>Nome</th>
+                    <th>Tempo</th>
+                    {% for entry in ranking %}
+                    <tr>
+                        <td>#{{ loop.index }} {{ entry[0] }}</td>
+                        <td>{{ entry[1] }}s</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <p>⚠️ Falha ao ler o banco de dados!</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="modal" id="help-modal">
+        <div class="modal-content">
+            <p>Você é um hormônio que está perambulando pelo corpo humano. Seu objetivo é passar por todos os órgãos uma única vez, sem repetição.</p>
+            <p>Se isso ocorrer, você será declarado vencedor. Caso contrário, será fim de jogo.</p>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

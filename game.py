@@ -1,7 +1,6 @@
 import time
 
 from database import Database
-from utils import clear_screen, show_menu
 
 class Game:
     """

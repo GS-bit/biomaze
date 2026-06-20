@@ -26,7 +26,7 @@ class Game:
             "PÂNCREAS": ["TIREOIDE", "ESTÔMAGO", "RINS"],
             "FÍGADO": ["PULMÕES", "CORAÇÃO", "INTESTINO DELGADO"],
             "BAÇO": ["CORAÇÃO", "INTESTINO DELGADO"],
-            "INTESTINO DELGADO": ["FÍGADO", "INTESTINO GROSSO", "CORAÇÃO", "BAÇO"],
+            "INTESTINO DELGADO": ["FÍGADO", "INTESTINO GROSSO", "CORAÇÃO", "BAÇO", "RINS"],
             "RINS": ["ESTÔMAGO", "PÂNCREAS", "INTESTINO DELGADO", "INTESTINO GROSSO"],
             "INTESTINO GROSSO": ["INTESTINO DELGADO", "RINS", "SUPRARRENAIS"],
             "SUPRARRENAIS": ["INTESTINO GROSSO"]

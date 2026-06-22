@@ -1,0 +1,16 @@
+@import url('variables.css');
+
+#game-main{
+    display: flex;
+    flex-direction: row;
+}
+
+#game-main aside{
+    margin-right: 2%;
+}
+
+#movement-btns{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}

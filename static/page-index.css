@@ -1,0 +1,25 @@
+@import url('variables.css');
+
+#index-main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    text-align: center;
+}
+
+#index-main h1{
+    font-size: 64px;
+    font-family: "Elms Sans", sans-serif;
+    color: #97ac0a;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+#buttons{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 30px;
+    border: 10px dashed #97ac0a;
+}

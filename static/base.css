@@ -1,33 +1,14 @@
+@import url('variables.css');
+
 body{
     margin: 0;
     padding: 0;
-    font-family: "Elms Sans", sans-serif;
+    font-family: var(--font);
     background-color: #f0f0f0;
 }
 
 header{
     text-align: center;
-}
-
-#index-main{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    height: 100vh;
-    text-align: center;
-}
-
-#game-main{
-    display: flex;
-    flex-direction: row;
-}
-
-#index-main h1{
-    font-size: 64px;
-    font-family: "Elms Sans", sans-serif;
-    color: #97ac0a;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 table{
@@ -40,9 +21,9 @@ td{
 }
 
 button{
-    background-color: rgb(183, 226, 43);
+    background-color: var(--color-primary);
     color: black;
-    border: 2px solid #97ac0a;
+    border: 2px solid var(--color-tertiary);
     border-radius: 30px;
     padding: 20px;
     font-size: 16px;
@@ -50,18 +31,9 @@ button{
 }
 
 button:hover{
-    background-color: rgb(154, 190, 35);
+    background-color: var(--color-secondary);
     cursor: pointer;
     transition: all 0.5s ease;
-}
-
-
-#buttons{
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    padding: 30px;
-    border: 10px dashed #97ac0a;
 }
 
 .modal{

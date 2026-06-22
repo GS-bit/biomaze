@@ -1,3 +1,5 @@
+import time
+
 from flask import Flask, jsonify, render_template, request, redirect, url_for
 
 from database import Database
@@ -37,7 +39,7 @@ def new_game():
 @app.route('/gamestatus', methods=['GET'])
 def game_status():
     """
-    It gives the game status.
+    It returns the game status.
     """
 
     information = {
@@ -45,7 +47,10 @@ def game_status():
         "cur_organ": game.cur_organ,
         "activated_organs": game.activated_organs,
         "running": game.running,
-        "start_time": game.start_time
+        "start_time": game.start_time,
+        "gameover": game.gameover,
+        "time_spent": game.time_spent,
+        "random_seed": game.random_seed
     }
 
     return jsonify(information)
@@ -53,7 +58,7 @@ def game_status():
 @app.route('/gamemovement', methods=['POST'])
 def game_movement():
     """
-    It gives the game movement.
+    It applies a movement to the game.
     """
 
     new_organ = request.data.decode('utf-8')
@@ -67,6 +72,16 @@ def game_movement():
 
     if len(game.activated_organs) == 12:
         game.running = False
+
+        game.time_spent = round(time.perf_counter() - game.start_time, 2)  # Time spent on the game
+
+        """
+        database = Database()
+        if database.new_score(input("🪪  Digite seu nome, por favor: "), time_spent) == 0:  # Adding the score onto the DB
+            print("\nPontuação adicionada no ranking! Volte sempre 👋")
+        else:
+            print("\n⚠️ Falha ao adicionar pontuação no banco de dados!")
+        """
 
     return game_status()
 

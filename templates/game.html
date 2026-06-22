@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='page-game.css') }}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -42,7 +43,6 @@
     <div class="modal" id="won-modal">
         <div class="modal-content">
             <p>🥇 Parabéns! Você ativou todos os órgãos e venceu o jogo!</p>
-            <p>⏳ Tempo gasto: {time_spent}s</p>
         </div>
     </div>
 
@@ -53,5 +53,6 @@
     </div>
 
     <script src="{{ url_for('static', filename='game.js') }}"></script>
+    <script src="{{ url_for('static', filename='modals.js') }}"></script>
 </body>
 </html>

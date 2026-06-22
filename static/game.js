@@ -6,7 +6,12 @@ function drawMap(){
             let edges = [];
 
             for(const organ in game_data.connections){
-                nodes.push({id: organ, label: organ});
+                if(game_data.activated_organs.includes(organ)){
+                    nodes.push({id: organ, label: organ, color: 'green', font: {color: 'white'}});
+                }
+                else{
+                    nodes.push({id: organ, label: organ});
+                }
 
                 for(connection of game_data.connections[organ]){
                     edges.push({from: organ, to: connection});
@@ -19,6 +24,10 @@ function drawMap(){
             };
 
             const options = {
+                layout: {
+                    randomSeed: game_data.random_seed
+                },
+
                 nodes: {
                     shape: 'circle',
                     size: 30,
@@ -29,7 +38,7 @@ function drawMap(){
                     },
                     borderWidth: 1,
                     borderWidthSelected: 1,
-                    font: { size: 16, face: ['Elms Sans', 'sans-serif'], multi: false, bold: { color: '#000000', size: 16, face: ['Elms Sans', 'sans-serif'], vadjust: 0 } }
+                    font: { size: 16, face: 'Elms Sans' }
                 },
 
                 edges: {
@@ -58,14 +67,6 @@ function drawMap(){
                     }
                 },
 
-                stabilization: {
-                    enabled: true,
-                    iterations: 100,
-                    updateInterval: 25,
-                    onlyDynamicEdges: false,
-                    fit: true
-                },
-
                 interaction: {
                     dragNodes: false,
                     dragView: false,
@@ -78,15 +79,17 @@ function drawMap(){
             container.style.border = "none";
             container.style.outline = "none";
 
-            const network = new vis.Network(container, data, options);
+            network = new vis.Network(container, data, options);
         })
         .catch(error => alert("Erro ao gerar o mapa do labirinto!", error));
 }
 
-const btns = [...document.getElementsByClassName('movement-btn')];
+const movementBtns = document.getElementById('movement-btns');
 
-btns.forEach(function sendMovement(element){
-    element.addEventListener("click", () => {
+movementBtns.addEventListener("click", event => {
+    if(event.target && event.target.classList.contains('movement-btn')){
+        const element = event.target;
+
         fetch('gamemovement', {
             method: 'POST',
             headers: {
@@ -96,18 +99,38 @@ btns.forEach(function sendMovement(element){
         })
         .then(response => response.json())
         .then(game_data => {
+            /* Updating textual info on the page: */
+
             document.getElementById("cur-organ").innerText = game_data.cur_organ;
             document.getElementById("activated-organs").innerText = game_data.activated_organs.length;
 
             const movement_btns = document.getElementById("movement-btns");
 
             movement_btns.innerHTML = "";
-            for(organ of game_data.connections[game_data.cur_organ]){
+            for(let organ of game_data.connections[game_data.cur_organ]){
                 movement_btns.innerHTML += `<button class="movement-btn">${ organ }</button>`;
             }
+
+            /* Updating map: */
+            drawMap();
+
+            /* Showing modals on the page, if necessary: */
+
+            if(!game_data.running){
+                if(game_data.gameover){
+                    document.getElementById("gameover-modal").style.display = "flex";
+                }
+
+                else{
+                    document.getElementById("won-modal").style.display = "flex";
+                    document.getElementById("won-modal").getElementsByClassName("modal-content")[0].innerHTML += `<p>⏳ Tempo gasto: ${game_data.time_spent}s</p>`;
+                }
+
+                //window.location.href = '/';
+            }
         })
-        .catch(error => alert("Erro ao enviar movimento ao servidor!", error))
-    });
+        .catch(error => alert("Erro ao enviar movimento ao servidor!", error));
+    }
 });
 
 drawMap();

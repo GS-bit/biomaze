@@ -5,7 +5,11 @@ body{
     background-color: #f0f0f0;
 }
 
-main{
+header{
+    text-align: center;
+}
+
+#index-main{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,7 +18,12 @@ main{
     text-align: center;
 }
 
-h1{
+#game-main{
+    display: flex;
+    flex-direction: row;
+}
+
+#index-main h1{
     font-size: 64px;
     font-family: "Elms Sans", sans-serif;
     color: #97ac0a;
@@ -45,6 +54,7 @@ button:hover{
     cursor: pointer;
     transition: all 0.5s ease;
 }
+
 
 #buttons{
     display: flex;

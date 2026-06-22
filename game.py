@@ -38,6 +38,8 @@ class Game:
 
         self.start_time = time.perf_counter()
 
+        self.gameover = False
+
     def show_map(self) -> None:
         """
         It shows a map of the maze on the screen.

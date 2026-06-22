@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Elms+Sans:ital,wght@0,100..900;1,100..900&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧭</text></svg>">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/10.0.2/dist/vis-network.min.js"></script>
+
+    <title>Biomaze</title>
+</head>
+<body>
+    <header>
+        <h1>🧭 BIOMAZE: LABIRINTO ENDÓCRINO 🧭</h1>
+    </header>
+
+    <main id="game-main">
+        <div id="maze" style="width: 90vw; height: 80vh; border: none !important; outline: none !important; box-shadow: none !important;">
+        </div>
+
+        <aside>
+            <h1>📍 Órgão atual:</h1><h1>[ <span id="cur-organ">{{ game.cur_organ }}</span> ]</h1>
+            <h2>🧪 Número de órgãos ativados: <span id="activated-organs">{{ game.activated_organs|length }}</span> de 12</h2>
+
+            <h2>🩸 VIAS SANGUÍNEAS DISPONÍVEIS:</h2>
+            <h3>➡ Escolha o seu caminho:</h3>
+
+            <div id="movement-btns">
+                {% for organ in game.connections[game.cur_organ] %}
+                    <button class="movement-btn">{{ organ }}</button>
+                {% endfor %}
+            </div>
+        </aside>
+    </main>
+
+    <div class="modal" id="won-modal">
+        <div class="modal-content">
+            <p>🥇 Parabéns! Você ativou todos os órgãos e venceu o jogo!</p>
+            <p>⏳ Tempo gasto: {time_spent}s</p>
+        </div>
+    </div>
+
+    <div class="modal" id="gameover-modal">
+        <div class="modal-content">
+            <p>😔 Game over! Você ativou um órgão mais de uma vez. Tente novamente.</p>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='game.js') }}"></script>
+</body>
+</html>

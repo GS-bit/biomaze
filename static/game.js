@@ -94,10 +94,9 @@ function drawMap(){
 function resetGame(){
     /* 
     It resets the game data, so the user can play multiple games.
-    The function returns a Promise.
     */
 
-    return fetch('/resetgame', {
+    fetch('/resetgame', {
         method: 'POST',
         headers: {
             'Content-Type': 'text/plain'
@@ -144,13 +143,14 @@ movementBtns.addEventListener("click", event => {
             /* Showing modals on the page, if necessary: */
 
             if(!game_data.running){
+                resetGame();
+
                 if(game_data.gameover){ // Game over modal
                     const gameoverModal = document.getElementById("gameover-modal");
                     gameoverModal.style.display = "flex";
                     gameoverModal.getElementsByTagName("span")[0].addEventListener("click", event => {
                         // Sending the player to the home page:
-                        resetGame()
-                        .then(() => window.location.href = '/');
+                        window.location.href = '/';
                     });
                 }
 
@@ -170,8 +170,7 @@ movementBtns.addEventListener("click", event => {
 
                     wonModal.getElementsByTagName("span")[0].addEventListener("click", event => {
                         // Sending the player to the home page:
-                        resetGame()
-                        .then(() => window.location.href = '/');
+                        window.location.href = '/';
                     });
                 }
             }

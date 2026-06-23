@@ -28,6 +28,7 @@
     <div class="modal" id="ranking-modal">
         <div class="modal-content">
             <h2>Ranking</h2>
+
             {% if ranking == [] %}
                 <p>🚨 Nenhuma pontuação registrada até o momento!</p>
             {% elif not ranking is none %}
@@ -49,6 +50,8 @@
 
     <div class="modal" id="help-modal">
         <div class="modal-content">
+            <h2>Como jogar</h2>
+
             <p>Você é um hormônio que está perambulando pelo corpo humano. Seu objetivo é passar por todos os órgãos uma única vez, sem repetição.</p>
             <p>Se isso ocorrer, você será declarado vencedor. Caso contrário, será fim de jogo.</p>
         </div>

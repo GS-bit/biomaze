@@ -161,8 +161,10 @@ movementBtns.addEventListener("click", event => {
                     let new_html = "";
                     
                     new_html += `<p>⏳ Tempo gasto: ${game_data.time_spent}s</p>`;
+                    new_html += "<hr />"
                     new_html += "<p>🪪  Digite seu nome, por favor:</p>";
-                    new_html += '<input type="text" />';
+                    new_html += '<input type="text" autofocus />';
+                    new_html += '<button style="padding-top: 1px; padding-bottom: 1px; margin-left: 5px">Registrar pontuação</button>';
 
                     wonModal.getElementsByClassName("modal-content")[0].innerHTML += new_html;
 

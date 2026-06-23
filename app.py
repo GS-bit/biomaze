@@ -69,5 +69,16 @@ def game_movement():
 
     return game_status()
 
+@app.route('/resetgame', methods=['POST'])
+def reset_game():
+    """
+    It resets the game.
+    """
+
+    global game
+    game = Game()
+
+    return ""
+
 if __name__ == '__main__':
     app.run(debug=True)

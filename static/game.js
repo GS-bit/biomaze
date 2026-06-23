@@ -94,7 +94,18 @@ function drawMap(){
 function resetGame(){
     /* 
     It resets the game data, so the user can play multiple games.
+    The function returns a Promise.
     */
+
+    return fetch('/resetgame', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'text/plain'
+        },
+        body: ''
+    })
+    .then(response => {})
+    .catch(error => console.log("Erro ao reiniciar o jogo!", error));
 }
 
 /* Adding event to the movement buttons, so the user can tell the server the movement he/she
@@ -137,7 +148,9 @@ movementBtns.addEventListener("click", event => {
                     const gameoverModal = document.getElementById("gameover-modal");
                     gameoverModal.style.display = "flex";
                     gameoverModal.getElementsByTagName("span")[0].addEventListener("click", event => {
-                        window.location.href = '/' // Sending the player to the home page.
+                        // Sending the player to the home page:
+                        resetGame()
+                        .then(() => window.location.href = '/');
                     });
                 }
 
@@ -152,6 +165,12 @@ movementBtns.addEventListener("click", event => {
                     new_html += '<input type="text" />';
 
                     wonModal.getElementsByClassName("modal-content")[0].innerHTML += new_html;
+
+                    wonModal.getElementsByTagName("span")[0].addEventListener("click", event => {
+                        // Sending the player to the home page:
+                        resetGame()
+                        .then(() => window.location.href = '/');
+                    });
                 }
             }
         })

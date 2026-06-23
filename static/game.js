@@ -1,10 +1,17 @@
+/* JavaScript for game.html page */
+
 function drawMap(){
+    /*
+    It draws the game map on the page.
+    */
+
     fetch('gamestatus')
         .then(response => response.json())
         .then(game_data => {
             let nodes = [];
             let edges = [];
 
+            /* Inserting nodes into the nodes array, including the color if they are activated: */
             for(const organ in game_data.connections){
                 if(game_data.activated_organs.includes(organ)){
                     nodes.push({id: organ, label: organ, color: 'green', font: {color: 'white'}});
@@ -84,6 +91,15 @@ function drawMap(){
         .catch(error => alert("Erro ao gerar o mapa do labirinto!", error));
 }
 
+function resetGame(){
+    /* 
+    It resets the game data, so the user can play multiple games.
+    */
+}
+
+/* Adding event to the movement buttons, so the user can tell the server the movement he/she
+desires to choose: */
+
 const movementBtns = document.getElementById('movement-btns');
 
 movementBtns.addEventListener("click", event => {
@@ -117,20 +133,32 @@ movementBtns.addEventListener("click", event => {
             /* Showing modals on the page, if necessary: */
 
             if(!game_data.running){
-                if(game_data.gameover){
-                    document.getElementById("gameover-modal").style.display = "flex";
+                if(game_data.gameover){ // Game over modal
+                    const gameoverModal = document.getElementById("gameover-modal");
+                    gameoverModal.style.display = "flex";
+                    gameoverModal.getElementsByTagName("span")[0].addEventListener("click", event => {
+                        window.location.href = '/' // Sending the player to the home page.
+                    });
                 }
 
-                else{
-                    document.getElementById("won-modal").style.display = "flex";
-                    document.getElementById("won-modal").getElementsByClassName("modal-content")[0].innerHTML += `<p>⏳ Tempo gasto: ${game_data.time_spent}s</p>`;
-                }
+                else{ // Won game modal
+                    const wonModal = document.getElementById("won-modal");
+                    wonModal.style.display = "flex";
 
-                //window.location.href = '/';
+                    let new_html = "";
+                    
+                    new_html += `<p>⏳ Tempo gasto: ${game_data.time_spent}s</p>`;
+                    new_html += "<p>🪪  Digite seu nome, por favor:</p>";
+                    new_html += '<input type="text" />';
+
+                    wonModal.getElementsByClassName("modal-content")[0].innerHTML += new_html;
+                }
             }
         })
         .catch(error => alert("Erro ao enviar movimento ao servidor!", error));
     }
 });
+
+/* Drawing the map on the screen: */
 
 drawMap();

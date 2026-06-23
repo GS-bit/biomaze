@@ -1,3 +1,7 @@
+/* JavaScript for game.html page */
+
+/* Configuring "show ranking" and "how to play" buttons: */
+
 const showRankingBtn = document.getElementById("show-ranking-btn");
 const howToPlayBtn = document.getElementById("how-to-play-btn");
 

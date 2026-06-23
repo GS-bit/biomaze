@@ -31,13 +31,13 @@ class Game:
             "SUPRARRENAIS": ["INTESTINO GROSSO"]
         }
         
-        self.cur_organ = "HIPÓFISE"  # The organ our hormone is located at the moment
-        self.activated_organs = ["HIPÓFISE"]  # A list of all organs that received the hormone
+        self.cur_organ = "HIPÓFISE"  # The organ our hormone is located at the moment.
+        self.activated_organs = ["HIPÓFISE"]  # A list of all organs that received the hormone.
 
         self.running = True  # Boolean variable: True if the game is running, False otherwise.
         self.gameover = False  # Boolean variable: True if the game is in gameover, False otherwise.
 
-        self.random_seed = randint(1,1000) # Seed used for graph renderization on the browser
+        self.random_seed = randint(1,1000) # Seed used for graph renderization on the browser.
 
-        self.start_time = time.perf_counter() # A number that represents the beginning of the time on the game
-        self.time_spent = 0 # A number that represents the duration of the game
+        self.start_time = time.perf_counter() # A number that represents the beginning of the time on the game.
+        self.time_spent = 0 # A number that represents the duration of the game.

@@ -1,3 +1,5 @@
+/* Adding X button (that is, close button) on the modals: */
+
 const modals = [...document.getElementsByClassName("modal")];
 modals.forEach(element => {
     element.children[0].insertAdjacentHTML('afterbegin', '<div style="display: flex; justify-content: flex-end"><span style="font-size: 24px; cursor: pointer">X</span></div>');

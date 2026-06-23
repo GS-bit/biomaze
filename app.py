@@ -11,27 +11,19 @@ game = Game()
 
 @app.route('/')
 def index():
+    """
+    Main page.
+    """
+
     database = Database()
     ranking = database.get_ranking()
-
-    """
-    if ranking == []:
-        return "🚨 Nenhuma pontuação registrada até o momento!"
-    elif ranking is not None:
-        result = "🏆 RANKING BIOMAZE:\n"
-        for _id, tuple in enumerate(ranking):
-            result += f"#{_id+1} {tuple[0]}: {tuple[1]}s\n"
-        return result
-    else:
-        return "⚠️ Falha ao ler o banco de dados!"
-    """
 
     return render_template('index.html', ranking=ranking)
 
 @app.route('/game')
 def new_game():
     """
-    It opens the new game page.
+    It opens the "new game" page.
     """
 
     return render_template('game.html', game=game)
@@ -39,7 +31,7 @@ def new_game():
 @app.route('/gamestatus', methods=['GET'])
 def game_status():
     """
-    It returns the game status.
+    It gives the game status to client side.
     """
 
     information = {
@@ -58,7 +50,7 @@ def game_status():
 @app.route('/gamemovement', methods=['POST'])
 def game_movement():
     """
-    It applies a movement to the game.
+    It applies a movement to the game, receiving the command from the client side.
     """
 
     new_organ = request.data.decode('utf-8')
@@ -74,14 +66,6 @@ def game_movement():
         game.running = False
 
         game.time_spent = round(time.perf_counter() - game.start_time, 2)  # Time spent on the game
-
-        """
-        database = Database()
-        if database.new_score(input("🪪  Digite seu nome, por favor: "), time_spent) == 0:  # Adding the score onto the DB
-            print("\nPontuação adicionada no ranking! Volte sempre 👋")
-        else:
-            print("\n⚠️ Falha ao adicionar pontuação no banco de dados!")
-        """
 
     return game_status()
 

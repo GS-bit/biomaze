@@ -80,5 +80,22 @@ def reset_game():
 
     return ""
 
+@app.route('/savescore', methods=['POST'])
+def save_score():
+    """
+    It saves the score.
+    """
+
+    received_data = request.get_json()
+    name = received_data["name"]
+    time_spent = received_data["time_spent"]
+
+    database = Database()
+
+    if database.new_score(name, time_spent) == 0:  # Adding the score onto the DB
+        return "Pontuação adicionada no ranking! Volte sempre 👋"
+    else:
+        return "⚠️ Falha ao adicionar pontuação no banco de dados!" 
+
 if __name__ == '__main__':
     app.run(debug=True)

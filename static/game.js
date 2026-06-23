@@ -96,7 +96,7 @@ function resetGame(){
     It resets the game data, so the user can play multiple games.
     */
 
-    fetch('/resetgame', {
+    return fetch('/resetgame', {
         method: 'POST',
         headers: {
             'Content-Type': 'text/plain'
@@ -105,6 +105,22 @@ function resetGame(){
     })
     .then(response => {})
     .catch(error => console.log("Erro ao reiniciar o jogo!", error));
+}
+
+function saveScore(playersName, timeSpent){
+    /* 
+    It saves the player's score on the database.
+    */
+
+    return fetch('/savescore', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({"name": playersName, "time_spent": timeSpent})
+    })
+    .then(response => {})
+    .catch(error => console.log("Erro ao enviar dados ao servidor!", error));
 }
 
 /* Adding event to the movement buttons, so the user can tell the server the movement he/she
@@ -163,14 +179,20 @@ movementBtns.addEventListener("click", event => {
                     new_html += `<p>⏳ Tempo gasto: ${game_data.time_spent}s</p>`;
                     new_html += "<hr />"
                     new_html += "<p>🪪  Digite seu nome, por favor:</p>";
-                    new_html += '<input type="text" autofocus />';
-                    new_html += '<button style="padding-top: 1px; padding-bottom: 1px; margin-left: 5px">Registrar pontuação</button>';
+                    new_html += '<input type="text" id="players-name" autofocus />';
+                    new_html += '<button id="save-score-btn" style="padding-top: 1px; padding-bottom: 1px; margin-left: 5px">Registrar pontuação</button>';
 
                     wonModal.getElementsByClassName("modal-content")[0].innerHTML += new_html;
 
                     wonModal.getElementsByTagName("span")[0].addEventListener("click", event => {
                         // Sending the player to the home page:
                         window.location.href = '/';
+                    });
+
+                     document.getElementById("save-score-btn").addEventListener("click", event => {
+                        const playersName = document.getElementById("players-name");
+                        saveScore(playersName.value, game_data.time_spent)
+                        .then(() => {window.location.href = '/'}); // Sending the player to the home page. 
                     });
                 }
             }

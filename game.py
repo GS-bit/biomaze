@@ -39,5 +39,5 @@ class Game:
 
         self.random_seed = randint(1,1000) # Seed used for graph renderization on the browser.
 
-        self.start_time = time.perf_counter() # A number that represents the beginning of the time on the game.
-        self.time_spent = 0 # A number that represents the duration of the game.
+        self.start_time = 0 # A number that represents the beginning of the time on the game.
+        self.end_time = 0 # A number that represents the end of the time of the game.

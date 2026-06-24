@@ -34,11 +34,13 @@
             {% elif not ranking is none %}
                 <table>
                     <th>Nome</th>
+                    <th>Órgão inicial</th>
                     <th>Tempo</th>
                     {% for entry in ranking %}
                     <tr>
-                        <td>#{{ loop.index }} {{ entry[0] }}</td>
-                        <td>{{ entry[1] }}s</td>
+                        <td>{{ entry[0] }}</td>
+                        <td>{{ entry[1] }}</td>
+                        <td>{{ entry[2] }}s</td>
                     </tr>
                     {% endfor %}
                 </table>

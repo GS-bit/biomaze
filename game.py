@@ -1,4 +1,4 @@
-from random import randint
+from random import choice, randint
 import time
 
 
@@ -31,8 +31,13 @@ class Game:
             "SUPRARRENAIS": ["INTESTINO GROSSO"]
         }
         
-        self.cur_organ = "HIPÓFISE"  # The organ our hormone is located at the moment.
-        self.activated_organs = ["HIPÓFISE"]  # A list of all organs that received the hormone.
+        # The list of possible initial organs in the maze:
+        start_organs = list(self.connections.keys())
+        start_organs.remove("INTESTINO GROSSO")  # Starting at "Intestino grosso" won't give us solution to the maze.
+
+        self.start_organ = choice(start_organs)  # The initial organ in the maze.
+        self.cur_organ = self.start_organ  # The organ our hormone is located at the moment.
+        self.activated_organs = [self.cur_organ]  # A list of all organs that received the hormone.
 
         self.running = True  # Boolean variable: True if the game is running, False otherwise.
         self.gameover = False  # Boolean variable: True if the game is in gameover, False otherwise.

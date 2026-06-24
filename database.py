@@ -17,6 +17,7 @@ class Database:
         self.cursor.execute("""
         CREATE TABLE IF NOT EXISTS scores (
             name TEXT NOT NULL,
+            start_organ TEXT NOT NULL,
             time INT NOT NULL)           
         """)
 
@@ -39,12 +40,13 @@ class Database:
         except:
             return None
 
-    def new_score(self, name, time) -> int:
+    def new_score(self, name, start_organ, time) -> int:
         """
         It adds a new score on the database.
 
         Arguments:
             name: the player's name.
+            start_organ: the start organ.
             time: the player's time in seconds.
 
         Returns:
@@ -53,11 +55,11 @@ class Database:
         """
 
         insertion_command = """
-        INSERT INTO scores (name, time) VALUES (?, ?)                
+        INSERT INTO scores (name, start_organ, time) VALUES (?, ?, ?)                
         """
 
         try:
-            self.cursor.execute(insertion_command, (name, time))
+            self.cursor.execute(insertion_command, (name, start_organ, time))
             self.db.commit()
 
             return 0

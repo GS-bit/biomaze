@@ -40,6 +40,7 @@ def game_status():
 
     information = {
         "connections": game.connections,
+        "start_organ": game.start_organ,
         "cur_organ": game.cur_organ,
         "activated_organs": game.activated_organs,
         "running": game.running,
@@ -91,11 +92,12 @@ def save_score():
 
     received_data = request.get_json()
     name = received_data["name"]
+    start_organ = received_data["start_organ"]
     time_spent = received_data["time_spent"]
 
     database = Database()
 
-    if database.new_score(name, time_spent) == 0:  # Adding the score onto the DB
+    if database.new_score(name, start_organ, time_spent) == 0:  # Adding the score onto the DB
         return "Pontuação adicionada no ranking! Volte sempre 👋"
     else:
         return "⚠️ Falha ao adicionar pontuação no banco de dados!" 

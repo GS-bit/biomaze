@@ -113,7 +113,7 @@ function resetGame(){
     });
 }
 
-function saveScore(playersName, timeSpent){
+function saveScore(playersName, startOrgan, timeSpent){
     /* 
     It saves the player's score on the database.
     */
@@ -123,7 +123,7 @@ function saveScore(playersName, timeSpent){
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({"name": playersName, "time_spent": timeSpent})
+        body: JSON.stringify({"name": playersName, "start_organ": startOrgan, "time_spent": timeSpent})
     })
     .then(response => {})
     .catch(error => {
@@ -200,7 +200,7 @@ movementBtns.addEventListener("click", event => {
 
                      document.getElementById("save-score-btn").addEventListener("click", event => {
                         const playersName = document.getElementById("players-name");
-                        saveScore(playersName.value, game_data.time_spent)
+                        saveScore(playersName.value, game_data.start_organ, game_data.time_spent)
                         .then(() => {window.location.href = '/'}); // Sending the player to the home page. 
                     });
                 }

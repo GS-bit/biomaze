@@ -17,15 +17,15 @@ table{
 
 td{
     border: 2px solid #000;
-    padding-right: 20px;
+    padding-right: var(--default-padding);
 }
 
 button{
     background-color: var(--color-primary);
     color: black;
     border: 2px solid var(--color-tertiary);
-    border-radius: 30px;
-    padding: 20px;
+    border-radius: var(--default-border-radius);
+    padding: var(--default-padding);
     font-size: 16px;
     font-family: "Elms Sans", sans-serif;
 }
@@ -37,7 +37,7 @@ button:hover{
 }
 
 input{
-    border-radius: 30px;
+    border-radius: var(--default-border-radius);
     padding-left: 5px;
 }
 
@@ -57,6 +57,6 @@ input{
 
 .modal-content{
     background-color: #f0f0f0;
-    border-radius: 30px;
+    border-radius: var(--default-border-radius);
     padding: 30px;
 }

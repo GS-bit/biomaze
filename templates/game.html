@@ -17,28 +17,31 @@
     <title>Biomaze</title>
 </head>
 <body>
-    <header>
-        <h1>🧭 BIOMAZE: LABIRINTO ENDÓCRINO 🧭</h1>
-    </header>
+    <div id="grid">
+        <header>
+            <h1>🧭 BIOMAZE: LABIRINTO ENDÓCRINO 🧭</h1>
+        </header>
 
-    <main id="game-main">
-        <div id="maze" style="width: 90vw; height: 80vh">
+        <div id="maze">
         </div>
 
         <aside>
             <h1>📍 Órgão atual:</h1><h1>[ <span id="cur-organ">{{ game.cur_organ }}</span> ]</h1>
-            <h2>🧪 Número de órgãos ativados: <span id="activated-organs">{{ game.activated_organs|length }}</span> de 12</h2>
-
-            <h2>🩸 VIAS SANGUÍNEAS DISPONÍVEIS:</h2>
-            <h3>➡ Escolha o seu caminho:</h3>
+            <br /> 
+            <h3>🧪 Número de órgãos ativados: <br /><span id="activated-organs">{{ game.activated_organs|length }}</span> de 12</h3>
+            <br />
+            <h3>🩸 VIAS SANGUÍNEAS DISPONÍVEIS:</h2>
+            <h4>➡ Escolha o seu caminho:</h4>
+            <br /> 
 
             <div id="movement-btns">
                 {% for organ in game.connections[game.cur_organ] %}
                     <button class="movement-btn">{{ organ }}</button>
                 {% endfor %}
             </div>
+            <br />
         </aside>
-    </main>
+    </div>
 
     <div class="modal" id="won-modal">
         <div class="modal-content">

@@ -88,7 +88,10 @@ function drawMap(){
 
             network = new vis.Network(container, data, options);
         })
-        .catch(error => alert("Erro ao gerar o mapa do labirinto!", error));
+        .catch(error => {
+            alert("Erro ao gerar o mapa do labirinto!", error);
+            console.log("Erro ao gerar o mapa do labirinto!", error);
+        });
 }
 
 function resetGame(){
@@ -104,7 +107,10 @@ function resetGame(){
         body: ''
     })
     .then(response => {})
-    .catch(error => console.log("Erro ao reiniciar o jogo!", error));
+    .catch(error => {
+        alert("Erro ao reiniciar o jogo!", error);
+        console.log("Erro ao reiniciar o jogo!", error);
+    });
 }
 
 function saveScore(playersName, timeSpent){
@@ -120,7 +126,10 @@ function saveScore(playersName, timeSpent){
         body: JSON.stringify({"name": playersName, "time_spent": timeSpent})
     })
     .then(response => {})
-    .catch(error => console.log("Erro ao enviar dados ao servidor!", error));
+    .catch(error => {
+        alert("Erro ao enviar pontuação ao servidor!", error);
+        console.log("Erro ao enviar pontuação ao servidor!", error);
+    });
 }
 
 /* Adding event to the movement buttons, so the user can tell the server the movement he/she
@@ -197,7 +206,10 @@ movementBtns.addEventListener("click", event => {
                 }
             }
         })
-        .catch(error => alert("Erro ao enviar movimento ao servidor!", error));
+        .catch(error => {
+            alert("Erro ao enviar movimento ao servidor!", error);
+            console.log("Erro ao enviar movimento ao servidor!", error);
+        });
     }
 });
 
